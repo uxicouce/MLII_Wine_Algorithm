@@ -6,7 +6,7 @@ import pickle
 import streamlit as st
 from sklearn.preprocessing import StandardScaler
 loaded_model = pickle.load(open('svm_trained_model.sav','rb'))
-
+scaler = pickle.load(open('stdscaler.sav','rb'))
 #creating function
 def wine_prediction(input_data):
     
@@ -17,8 +17,6 @@ def wine_prediction(input_data):
     # reshape the array as we are predicting for one instance
     input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
 
-    scaler = StandardScaler()
-    scaler.fit(input_data_reshaped)
     std_data = scaler.transform(input_data_reshaped)
 
     prediction = loaded_model.predict(std_data)
